@@ -2,7 +2,7 @@ import React, {Component} from 'react';
 import {connect} from 'react-redux'
 import {Request, RequestModel, RequestVersion,RequestAllVehicles} from '../../utils/connect'
 import {saveMakers,saveModel,saveVehicles,saveVersion} from '../../redux/actions/vehicleActions'
-import {StyleSheet, View, ActivityIndicator, Dimensions} from 'react-native';
+import {StyleSheet, View, ActivityIndicator, Dimensions, Alert} from 'react-native';
 
 let {width,height} = Dimensions.get('window')
 
@@ -10,23 +10,18 @@ class Initial extends Component{
     
     
     async componentDidMount(){
-        let rest = await Request('/api/OnlineChallenge/Make')
-        this.props.saveMakers(rest)
-        let rest2 = await RequestModel('/api/OnlineChallenge/Model?MakeID=',rest[0].ID.toString())
-        this.props.saveModel(rest2)
-        let rest3 = await RequestModel('/api/OnlineChallenge/Model?MakeID=',rest[1].ID.toString())
-        this.props.saveModel(rest3)
-        let rest4 = await RequestModel('/api/OnlineChallenge/Model?MakeID=',rest[2].ID.toString())
-        this.props.saveModel(rest4)
-        let rest5 = await RequestVersion('/api/onlineChallenge/Version?ModelID=',this.props.vehicle.models[0][0].ID.toString())
-        this.props.saveVersion(rest5)
-        let rest6 = await RequestVersion('/api/onlineChallenge/Version?ModelID=',this.props.vehicle.models[0][1].ID.toString()) 
-        this.props.saveVersion(rest6)
-        let rest7 = await RequestVersion('/api/onlineChallenge/Version?ModelID=',this.props.vehicle.models[0][2].ID.toString()) 
-        this.props.saveVersion(rest7)
-        let rest8 = await RequestAllVehicles('/api/OnlineChallenge/Vehicles?Page=',['1','2','3']).then(respost => {
-            console.log(respost)
-        })
+        try{
+            let rest = await Request('/api/OnlineChallenge/Make')
+            this.props.saveMakers(rest)
+            let rest2 = await RequestModel('/api/OnlineChallenge/Model?MakeID=',rest)
+            this.props.saveModel(rest2)
+            let rest3 = await RequestVersion('/api/onlineChallenge/Version?ModelID=',rest2)
+            this.props.saveVersion(rest3)
+            let rest4 = await RequestAllVehicles('/api/OnlineChallenge/Vehicles?Page=',['1','2','3'])
+            this.props.saveVehicles(rest4)
+        }catch(error){
+            Alert.alert('Erro ao carregar dados','Erro ao se conectar ao servidor',[{text:"Fechar"},{text:"Tentar Novamente",onPress:() => this.componentDidMount()}])
+        }
     }
 
 
