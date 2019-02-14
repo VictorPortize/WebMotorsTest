@@ -27,6 +27,7 @@ const styles = StyleSheet.create({
         width:width*0.9,
         height:height*0.4,
         resizeMode:'contain',
+        alignSelf:'center',
     },
     containerStyle:{
         borderWidth:2,
@@ -35,7 +36,7 @@ const styles = StyleSheet.create({
         elevation:4,
         width:width*0.95,
         alignSelf:'center',
-        marginTop:width*0.03
+        marginTop:width*0.05
     },
     priceStyle:{
         fontSize:RF(5),
