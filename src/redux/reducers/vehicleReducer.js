@@ -18,7 +18,11 @@ export default vehicleReducer = (state = initialState,action) => {
         case SAVE_VERSION:
             return Object.assign(state,{versions:action.array})
         case SAVE_VEHICLES:
-            return Object.assign(state,{allVehicles:action.array})
+            let array = []
+            for(let vehicle of action.array){
+                array.push(...vehicle)
+            }
+            return Object.assign(state,{allVehicles:array})
         default:
             return state
     }

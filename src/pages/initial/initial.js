@@ -19,6 +19,7 @@ class Initial extends Component{
             this.props.saveVersion(rest3)
             let rest4 = await RequestAllVehicles('/api/OnlineChallenge/Vehicles?Page=',['1','2','3'])
             this.props.saveVehicles(rest4)
+            this.props.navigation.replace('VehicleList')
         }catch(error){
             Alert.alert('Erro ao carregar dados','Erro ao se conectar ao servidor',[{text:"Fechar"},{text:"Tentar Novamente",onPress:() => this.componentDidMount()}])
         }
