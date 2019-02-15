@@ -8,7 +8,6 @@ import RF from 'react-native-responsive-fontsize'
 let {width, height} = Dimensions.get('window')
 
 export default connect(null,{setSelect})( props => {
-    console.log(props.value.Image)
     return(<View>
             <View style={styles.containerStyle}>
             <Image style={styles.imageStyle} source={{uri:props.value.Image }} ></Image>
