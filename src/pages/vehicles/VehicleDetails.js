@@ -21,9 +21,10 @@ class VehicleDetails extends React.Component{
                         <Text style={styles.nameStyle}>{`${this.props.vehicle.Make} ${this.props.vehicle.Model}`}</Text>
                         <Text style={{fontSize:RF(3)}}>{`${this.props.vehicle.Version}`}</Text>
                         <Text style={{fontSize:RF(2)}}>
-                        <Text style={{fontWeight:'bold'}}>COR: </Text> {`${this.props.vehicle.Color}`}
-                        <Text style={{fontWeight:'bold'}}>  FAB: </Text> {`${this.props.vehicle.YearFab}`}
-                        <Text style={{fontWeight:'bold'}}>  MODEL: </Text>{`${this.props.vehicle.YearModel}`}</Text>
+                            <Text style={{fontWeight:'bold',color:'black'}}>COR: <Text style={{color:'gray'}}>{`${this.props.vehicle.Color}`}</Text></Text>
+                            <Text style={{fontWeight:'bold',color:'black'}}>FAB: <Text style={{color:'gray'}}>{`${this.props.vehicle.YearFab}`}</Text></Text>
+                            <Text style={{fontWeight:'bold',color:'black'}}>MODEL: <Text style={{color:'gray'}}>{`${this.props.vehicle.YearModel}`}</Text></Text>
+                        </Text>
                         <Text style={{fontSize:RF(3)}}>{`KM: ${this.props.vehicle.KM}`}</Text>
                     </View>
                 </View>

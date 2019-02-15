@@ -8,6 +8,7 @@ import RF from 'react-native-responsive-fontsize'
 let {width, height} = Dimensions.get('window')
 
 export default connect(null,{setSelect})( props => {
+    console.log(props.value.Image)
     return(<View>
             <View style={styles.containerStyle}>
             <Image style={styles.imageStyle} source={{uri:props.value.Image }} ></Image>
@@ -21,9 +22,9 @@ export default connect(null,{setSelect})( props => {
                         <Text style={styles.nameStyle}>{`${props.value.Make} ${props.value.Model}`}</Text>
                         <Text style={{fontSize:RF(3)}}>{`${props.value.Version}`}</Text>
                         <Text style={{fontSize:RF(2)}}>
-                        <Text style={{fontWeight:'bold'}}>COR: </Text> {`${props.value.Color}`}
-                        <Text style={{fontWeight:'bold'}}>  FAB: </Text> {`${props.value.YearFab}`}
-                        <Text style={{fontWeight:'bold'}}>  MODEL: </Text>{`${props.value.YearModel}`}</Text>
+                        <Text style={{fontWeight:'bold',color:'black'}}>COR: <Text style={{color:'gray'}}>{`${props.value.Color}  `}</Text></Text> 
+                        <Text style={{fontWeight:'bold',color:'black'}}>FAB: <Text style={{color:'gray'}}>{`${props.value.YearFab}  `}</Text></Text> 
+                        <Text style={{fontWeight:'bold',color:'black'}}>MODEL: <Text style={{color:'gray'}}>{`${props.value.YearModel}  `}</Text></Text></Text>
                         <Text style={{fontSize:RF(3)}}>{`KM: ${props.value.KM}`}</Text>
                     </View>
                 </View>
@@ -62,7 +63,8 @@ const styles = StyleSheet.create({
     },
     nameStyle:{
         fontSize:RF(4),
-        fontWeight:'bold'
+        fontWeight:'bold',
+        color:'black'
     },
 
 })

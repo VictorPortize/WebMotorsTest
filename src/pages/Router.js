@@ -29,6 +29,7 @@ const Router = createStackNavigator({
             headerTitleStyle:{
                 fontSize:RF(3.2),
                 color:'white',
+                paddingLeft:width*0.05
             },
             headerRight:(<IconHeader name={'ios-search'} to={'FindPage'} ></IconHeader>)
         }

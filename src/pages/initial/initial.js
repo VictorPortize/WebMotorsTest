@@ -2,7 +2,7 @@ import React, {Component} from 'react';
 import {connect} from 'react-redux'
 import {Request, RequestModel, RequestVersion,RequestAllVehicles} from '../../utils/connect'
 import {saveMakers,saveModel,saveVehicles,saveVersion} from '../../redux/actions/vehicleActions'
-import {StyleSheet, View, ActivityIndicator, Dimensions, Alert} from 'react-native';
+import {StyleSheet, View, ActivityIndicator, Dimensions, Alert,Text} from 'react-native';
 
 let {width,height} = Dimensions.get('window')
 
@@ -19,6 +19,7 @@ class Initial extends Component{
             this.props.saveVersion(rest3)
             let rest4 = await RequestAllVehicles('/api/OnlineChallenge/Vehicles?Page=',['1','2','3'])
             this.props.saveVehicles(rest4)
+            console.log(rest4)
             this.props.navigation.replace('VehicleList')
         }catch(error){
             Alert.alert('Erro ao carregar dados','Erro ao se conectar ao servidor',[{text:"Fechar"},{text:"Tentar Novamente",onPress:() => this.componentDidMount()}])
@@ -30,6 +31,7 @@ class Initial extends Component{
         return (
         <View style={styles.container}>
             <ActivityIndicator  size={width*0.4} color={'darkred'}></ActivityIndicator>
+            <Text>Carregando dados do servidor...</Text>
         </View>
         );
     }
