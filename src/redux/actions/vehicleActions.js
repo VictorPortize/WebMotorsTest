@@ -24,3 +24,9 @@ export const saveVehicles = array => ({
     type: SAVE_VEHICLES,
     array
 })
+
+export const SET_SELECT = "SET_SELECT"
+export const setSelect = data => ({
+    type:SET_SELECT,
+    data
+})

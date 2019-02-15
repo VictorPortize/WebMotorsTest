@@ -1,26 +1,36 @@
 import React from 'react'
-import {View, Image, Text,StyleSheet,Dimensions} from 'react-native'
+import {View, Image, Text,StyleSheet,Dimensions,TouchableNativeFeedback} from 'react-native'
+import navigator from '../utils/navigationService'
+import {connect} from 'react-redux'
+import {setSelect} from '../redux/actions/vehicleActions'
 import RF from 'react-native-responsive-fontsize'
 
 let {width, height} = Dimensions.get('window')
 
-export default props => {
+export default connect(null,{setSelect})( props => {
     return(<View>
-        <View style={styles.containerStyle}>
+            <View style={styles.containerStyle}>
             <Image style={styles.imageStyle} source={{uri:props.value.Image }} ></Image>
-            <Text style={styles.priceStyle}>{`R$:${props.value.Price}`}</Text>
-            <View style={styles.detailsStyle}>
-                <Text style={styles.nameStyle}>{`${props.value.Make} ${props.value.Model}`}</Text>
-                <Text style={{fontSize:RF(3)}}>{`${props.value.Version}`}</Text>
-                <Text style={{fontSize:RF(2)}}>
-                <Text style={{fontWeight:'bold'}}>COR: </Text> {`${props.value.Color}`}
-                <Text style={{fontWeight:'bold'}}>  FAB: </Text> {`${props.value.YearFab}`}
-                <Text style={{fontWeight:'bold'}}>  MODEL: </Text>{`${props.value.YearModel}`}</Text>
-                <Text style={{fontSize:RF(3)}}>{`KM: ${props.value.KM}`}</Text>
-            </View>
+            <TouchableNativeFeedback onPress={(() => {
+                props.setSelect(props.value)
+                navigator.goTo('VehicleDetails')
+            })}>
+                <View>
+                    <Text style={styles.priceStyle}>{`R$:${props.value.Price}`}</Text>
+                    <View style={styles.detailsStyle}>
+                        <Text style={styles.nameStyle}>{`${props.value.Make} ${props.value.Model}`}</Text>
+                        <Text style={{fontSize:RF(3)}}>{`${props.value.Version}`}</Text>
+                        <Text style={{fontSize:RF(2)}}>
+                        <Text style={{fontWeight:'bold'}}>COR: </Text> {`${props.value.Color}`}
+                        <Text style={{fontWeight:'bold'}}>  FAB: </Text> {`${props.value.YearFab}`}
+                        <Text style={{fontWeight:'bold'}}>  MODEL: </Text>{`${props.value.YearModel}`}</Text>
+                        <Text style={{fontSize:RF(3)}}>{`KM: ${props.value.KM}`}</Text>
+                    </View>
+                </View>
+            </TouchableNativeFeedback>
         </View>
     </View>)
-}
+})
 
 const styles = StyleSheet.create({
     imageStyle:{

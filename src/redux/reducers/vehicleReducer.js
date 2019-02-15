@@ -1,4 +1,4 @@
-import {SAVE_MAKERS, SAVE_MODEL, SAVE_VEHICLES, SAVE_VERSION} from '../actions/vehicleActions'
+import {SAVE_MAKERS, SAVE_MODEL, SAVE_VEHICLES, SAVE_VERSION, SET_SELECT} from '../actions/vehicleActions'
 
 
 
@@ -6,7 +6,8 @@ const initialState = {
     makers:[],
     models:[],
     versions:[],
-    allVehicles:[]
+    allVehicles:[],
+    select:null
 }
 
 export default vehicleReducer = (state = initialState,action) => {
@@ -14,15 +15,26 @@ export default vehicleReducer = (state = initialState,action) => {
         case SAVE_MAKERS:
             return Object.assign(state,{makers:action.array})
         case SAVE_MODEL:
-            return Object.assign(state,{models:action.array})
+            let ticole = []
+            for(let muitobom of action.array){
+                ticole.push(...muitobom)
+            }
+            return Object.assign(state,{models:ticole})
         case SAVE_VERSION:
-            return Object.assign(state,{versions:action.array})
+            let ticolee = []
+            for(let muitoboom of action.array){
+                ticolee.push(...muitoboom)
+            }
+            return Object.assign(state,{versions:ticolee})
         case SAVE_VEHICLES:
             let array = []
             for(let vehicle of action.array){
                 array.push(...vehicle)
             }
             return Object.assign(state,{allVehicles:array})
+
+        case SET_SELECT:
+            return Object.assign(state,{select:action.data})
         default:
             return state
     }
